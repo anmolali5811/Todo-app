@@ -17,7 +17,7 @@ function Todos({ todo:t }) {
     const { user } = useContext(AuthContext);
 
     const deleteTodo = async () => {
-        const response = await fetch("http://localhost:5000/api/todos/"+ t._id, {
+        const response = await fetch("https://todo-node-hii2.onrender.com/api/todos/"+ t._id, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${user.token}`
@@ -36,7 +36,7 @@ function Todos({ todo:t }) {
     }
 
     const handleDone = async () => {
-        const response = await fetch("http://localhost:5000/api/todos/" + t._id, {
+        const response = await fetch("https://todo-node-hii2.onrender.com/api/todos/" + t._id, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function Todos({ todo:t }) {
         }
     }
     const handleActive = async () => {
-        const response = await fetch("http://localhost:5000/api/todos/" + t._id, {
+        const response = await fetch("https://todo-node-hii2.onrender.com/api/todos/" + t._id, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function Todos({ todo:t }) {
     }
 
     const editTodo = async () => {
-       const response = await fetch("http://localhost:5000/api/todos/"+ t._id, {
+       const response = await fetch("https://todo-node-hii2.onrender.com/api/todos/"+ t._id, {
         headers: {
             "Authorization": `Bearer ${user.token}`
         }
@@ -98,7 +98,7 @@ function Todos({ todo:t }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch("http://localhost:5000/api/todos/" + t._id, {
+        const response = await fetch("https://todo-node-hii2.onrender.com/api/todos/" + t._id, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

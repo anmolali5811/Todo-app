@@ -13,7 +13,7 @@ function Home() {
     useEffect(() => {
 
         const fetchTodos = async () => {
-            const response = await fetch("http://localhost:5000/api/todos", {
+            const response = await fetch("https://todo-node-hii2.onrender.com/api/todos", {
                 headers: {
                     "Authorization": `Bearer ${user.token}`
                 }
