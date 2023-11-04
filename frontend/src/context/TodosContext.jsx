@@ -47,7 +47,6 @@ const todoReducer = (state, action) => {
                 if (t._id == action.payload._id) {
                     return {...t, active: action.active }
                 }
-
                 return t;
             })
 
@@ -55,23 +54,20 @@ const todoReducer = (state, action) => {
                 todos: Aarr
             }
         case "FILTER_BY_ACTIVE_STATUS":
-            let FBASarr = state.todos;
-            FBASarr.sort((a, b) => {
-                return b.active - a.active
+            let FBASarr = action.payload.filter((t) => {
+                return t.active === true
             })
             return {
                 todos: FBASarr
             }
 
         case "FILTER_BY_COMPLETED_STATUS":
-            let FBCSarr = state.todos;
-            FBCSarr.sort((a, b) => {
-                return b.completed - a.completed
+            let FBCSarr = action.payload.filter((t) => {
+                return t.completed === true
             })
             return {
                 todos: FBCSarr
             }
-
 
         default:
             return state;

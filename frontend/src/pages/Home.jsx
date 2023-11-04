@@ -10,18 +10,18 @@ function Home() {
     const {todos, dispatch} = useContext(TodosContext);
     const { dispatch: Authdispatch, user } = useContext(AuthContext);
 
+    const fetchTodos = async () => {
+        const response = await fetch("https://todo-node-hii2.onrender.com/api/todos", {
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            }
+        });
+        const json = await response.json();
+
+        dispatch({type: "FETCH_TODOS", payload: json});
+    }
+
     useEffect(() => {
-
-        const fetchTodos = async () => {
-            const response = await fetch("https://todo-node-hii2.onrender.com/api/todos", {
-                headers: {
-                    "Authorization": `Bearer ${user.token}`
-                }
-            });
-            const json = await response.json();
-
-            dispatch({type: "FETCH_TODOS", payload: json});
-        }
 
         fetchTodos();
         
@@ -32,11 +32,26 @@ function Home() {
         Authdispatch({type: "LOGOUT"});
         dispatch({type: "FETCH_TODOS"})
     }
-    const handleCompleted = () => {
-        dispatch({type: "FILTER_BY_COMPLETED_STATUS"})
+    const handleAll = () => {
+        fetchTodos()
     }
-    const handleActive = () => {
-        dispatch({type: "FILTER_BY_ACTIVE_STATUS"})
+    const handleCompleted = async () => {
+        const response = await fetch("https://todo-node-hii2.onrender.com/api/todos", {
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            }
+        });
+        const json = await response.json();
+        dispatch({type: "FILTER_BY_COMPLETED_STATUS", payload: json})
+    }
+    const handleActive = async () => {
+        const response = await fetch("https://todo-node-hii2.onrender.com/api/todos", {
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            }
+        });
+        const json = await response.json();
+        dispatch({type: "FILTER_BY_ACTIVE_STATUS", payload: json})
     }
 
     return (
@@ -46,6 +61,7 @@ function Home() {
                 <button onClick={handleClick}>Logout</button>
             </div>
             <h2>Todo app</h2>
+            <button className='button' onClick={handleAll}>All</button>
             <button className='button' onClick={handleCompleted}>Filter By Completed</button>
             <button className='button' onClick={handleActive}>Filter By Active</button>
             <Input />
